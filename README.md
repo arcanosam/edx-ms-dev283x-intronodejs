@@ -11,7 +11,8 @@
 
 ### Parameters
 - **a01**
-  - convert csv to json - specifically the file customer-data.csv to customer-data.json
+  - Assignment 01 - convert csv to json
+    - specifically the file customer-data.csv to customer-data.json
 - **a02**
   - not yet implemented
 - **a03**
