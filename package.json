@@ -1,0 +1,26 @@
+{
+  "name": "edx-ms-dev283x-intronodejs",
+  "version": "1.0.0",
+  "description": "edX Microsoft: DEV283x Introduction to Node.js - Assignments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arcanosam/edx-ms-dev283x-intronodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arcanosam/edx-ms-dev283x-intronodejs/issues"
+  },
+  "homepage": "https://github.com/arcanosam/edx-ms-dev283x-intronodejs#readme",
+  "devDependencies": {
+    "express": "4.16.2"
+  },
+  "dependencies": {
+    "csvtojson": "1.1.9"
+  }
+}
