@@ -12,7 +12,8 @@ case "$PRMDIR" in
         cd $DIRPROJ/$PRMDIR && node csv-to-json.js
     ;;
     a02)
-        echo "Not yet implemented."
+        echo "Running RESTful Blog API server..."
+        npm start
     ;;
     a03)
         echo "Not yet implemented."
