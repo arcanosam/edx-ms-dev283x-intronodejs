@@ -14,8 +14,11 @@
   - Assignment 01 - convert csv to json
     - specifically the file customer-data.csv to customer-data.json
 - **a02**
-  - not yet implemented
+  - Assignment 02 - ?
+    - not yet implemented
 - **a03**
-  - not yet implemented
+  - Assignment 03 - ?
+    - not yet implemented
 - **a04**
-  - not yet implemented
+  - Assignment 04 - ?
+    - not yet implemented
