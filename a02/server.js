@@ -52,4 +52,9 @@ app.post(
     addComment
 )
 
+app.put(
+    '/posts/:postId/',
+    updatePost
+)
+
 app.listen(3000)
