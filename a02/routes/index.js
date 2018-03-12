@@ -1,4 +1,2 @@
-postM = require('./posts')
-comM = require('./comments')
-
-module.exports.getPosts = postM.getPosts
+module.exports.postsM = require('./posts')
+module.exports.commM = require('./comments')

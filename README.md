@@ -15,7 +15,7 @@
     - specifically the file customer-data.csv to customer-data.json
 - **a02**
   - Assignment 02 - RESTful Blog API
-    - 5% implemented - *in progress*
+    - 48% implemented - *in progress*
 - **a03**
   - Assignment 03 - ?
     - not yet implemented
