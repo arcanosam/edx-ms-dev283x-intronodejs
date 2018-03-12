@@ -1,3 +1,5 @@
+let {removeComment} = require('./comments')
+
 module.exports = {
     getPosts(req, res) {
         res.status(200).send(
@@ -34,5 +36,11 @@ module.exports = {
 
     },
     removePost(req, res) {
+
+        removeComment(req,res)
+
+        req.store.posts.splice(req.params.postId,1)
+
+        res.status(200).send("Post id "+req.params.postId+" and his comments were removed")
     }
 }

@@ -53,8 +53,23 @@ app.post(
 )
 
 app.put(
-    '/posts/:postId/',
+    '/posts/:postId',
     updatePost
+)
+
+app.put(
+    '/posts/:postId/comments/:commentId',
+    updateComment
+)
+
+app.delete(
+    '/posts/:postId/comments/:commentId',
+    removeComment
+)
+
+app.delete(
+    '/posts/:postId',
+    removePost
 )
 
 app.listen(3000)
