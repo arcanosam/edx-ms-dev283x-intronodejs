@@ -15,7 +15,11 @@
     - specifically the file customer-data.csv to customer-data.json
 - **a02**
   - Assignment 02 - RESTful Blog API
-    - 48% implemented - *in progress*
+    - 51% implemented - *in progress*
+    - When server started, you must 
+        - open another console/prompt window
+        - run shell script to perform tests:
+            - ./curl_cmds.sh
 - **a03**
   - Assignment 03 - ?
     - not yet implemented
