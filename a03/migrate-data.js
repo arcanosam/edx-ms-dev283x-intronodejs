@@ -1,13 +1,47 @@
 // Assignment 03
 // Data migration tool with MongoDB
 
+const fs = require('fs')
 const logger = require('morgan')
 const errorhandler = require('errorhandler')
 const mongodb= require('mongodb')
 
-const url = 'mongodb://localhost:27017/edx-course-db'
+let {insCustomers} = require('./cus-ins.js')
+let {updCustomers} = require('./cus-upd.js')
+
+const url = 'mongodb://localhost:27017/edxmsnodejs-a03'
 
 app.use(logger('dev'))
+
+async function migraCustomers(db) {
+
+    const json_data = {
+        cust: fs.readFileSync('./m3-customer-data.json', 'utf-8'),
+        addr: fs.readFileSync('./m3-customer-data.json', 'utf-8')
+    }
+
+    try {
+        await insCustomers(
+            db, 
+            () => {
+                updCustomers(
+                    db, 
+                    () =>  {
+                        db.close()
+                    }
+                )
+            },
+            json_data
+        )
+
+        console.log('Done!')
+        process.exit()
+
+    } catch(e) {
+        console.log(e);
+        process.exit();
+    }
+};
 
 mongodb.MongoClient.connect(
     url, 
@@ -16,27 +50,12 @@ mongodb.MongoClient.connect(
         if (error) 
             return process.exit(1)
 
-        db.collection('accounts').insert(
-            newAccount, 
-            (error, results) => {
+        console.log('Connection is okay')
 
-                if (error) 
-                    return next(error)
-
-                res.send(results)
-            }
-        )
-
-        db.collection('accounts').update(
-            {_id: mongodb.ObjectID( req.params.id)},
-            {$set: req.body},
-            (error, results) => {
-                if (error)
-                    return next(error)
-            }
-        )
-
-        app.use(errorhandler())
-        app.listen(3000)
+        migraCustomers(db)
     }
 )
+
+app.use(errorhandler())
+
+app.listen(3000)
