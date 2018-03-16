@@ -23,45 +23,53 @@ let usageHelp = ()=>{
     console.log('          - minimum task:    1')
 }
 
+let 
+let migrationProcess = (nTasks)=>{
+
+
+    async.parallel(
+        ,
+        (error, results) => {
+            console.log(error)
+            console.log(results)
+        }
+    )
+    /*mongodb.MongoClient.connect(
+        url, 
+        (error, db) => {
+
+            if (error) {
+                console.log(error)
+                return process.exit(1)
+            }
+            console.log('Connection is okay')
+
+            let colc = db.db('edxmsnodejs-a03').collection('customersdata')
+
+            console.log(nTasks)
+
+            console.log(colc.s.namespace)
+
+            db.close()
+
+        }
+    )*/
+}
+
 if(process.argv.length==3){
 
-    nTasks = process.argv[2]
+    nTasks = parseInt(process.argv[2])
 
     if(nTasks < 1 || nTasks > 100){
 
         usageHelp()
-    }    
+    }else{
+
+        migrationProcess(
+            nTasks
+        )
+    }
 }else{
 
     usageHelp()
 }
-
-const json_data = {
-    cust: JSON.parse(fs.readFileSync('./m3-customer-data.json', 'utf-8')),
-    addr: JSON.parse(fs.readFileSync('./m3-customer-data.json', 'utf-8'))
-}
-
-mongodb.MongoClient.connect(
-    url, 
-    (error, db) => {
-
-        if (error) {
-            console.log(error)
-            return process.exit(1)
-        }
-
-        console.log('Connection is okay')
-
-        console.log(db.db('edxmsnodejs-a03').collection('customersdata'))
-
-        db.close()
-
-        /*async.parallel(
-            migrationProcess(nTasks,collection),
-            (error, results) => {
-                console.log(error)
-                console.log(results)
-            }
-        )*/
-    }
-)
