@@ -20,8 +20,12 @@
         - run shell script to perform tests:
             - *./curl_cmds.sh*
 - **a03**
-  - Assignment 03 - ?
-    - not yet implemented
+  - Assignment 03 - MongoDB Migration Node Script
+    - In development
+     - I could realize until now
+        - how create a database
+        - a collection to this database
+        - and see some output info about this collection
 - **a04**
   - Assignment 04 - ?
     - not yet implemented
