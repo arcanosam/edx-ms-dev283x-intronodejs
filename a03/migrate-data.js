@@ -9,14 +9,10 @@ const errorhandler = require('errorhandler')
 const mongodb= require('mongodb')
 const async = require('async')
 
-let {migrationProcess} = require('./migration-process.js')
-
-const url = 'mongodb://localhost:27017/edxmsnodejs-a03'
+const url = 'mongodb://127.0.0.1:27017/edxmsnodejs-a03'
 
 let nTasks=0
 let RECORDS=1000
-
-app.use(logger('dev'))
 
 let usageHelp = ()=>{
     console.log('Assignment 03 - MongoDB Migration Node Script')
@@ -28,10 +24,10 @@ let usageHelp = ()=>{
 }
 
 if(process.argv.length==3){
-    
+
     nTasks = process.argv[2]
-    
-    if(nTasks < 1 && nTasks > 100){
+
+    if(nTasks < 1 || nTasks > 100){
 
         usageHelp()
     }    
@@ -49,24 +45,23 @@ mongodb.MongoClient.connect(
     url, 
     (error, db) => {
 
-        if (error) 
+        if (error) {
+            console.log(error)
             return process.exit(1)
+        }
 
         console.log('Connection is okay')
-        
-        const collection = db.collection('edxmsnodejs-a03')
 
-        async.parallel(
+        console.log(db.db('edxmsnodejs-a03').collection('customersdata'))
+
+        db.close()
+
+        /*async.parallel(
             migrationProcess(nTasks,collection),
             (error, results) => {
                 console.log(error)
                 console.log(results)
             }
-        )
-        
+        )*/
     }
 )
-
-app.use(errorhandler())
-
-app.listen(3000)
