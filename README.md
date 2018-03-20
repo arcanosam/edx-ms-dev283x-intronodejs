@@ -32,6 +32,7 @@
     - As an example to run this assignment you must:
         - *./runA a03 12 *
             - As *12* **parameter** could a value between 1 to 100
+        - But with **last commit** will *not work*
 - **a04**
   - Assignment 04 - ?
     - not yet implemented
