@@ -1,24 +1,46 @@
 #!/bin/bash
 
-PRMDIR=$1
+PRMA=$1
 DIRPROJ=$PWD
 
-case "$PRMDIR" in
+case "$PRMA" in
     a01)
-        if [ -e $DIRPROJ/$PRMDIR/customer-data.json ]
+        clear
+
+        if [ -e $DIRPROJ/$PRMA/customer-data.json ]
         then
-            cd $DIRPROJ/$PRMDIR && rm customer-data.json
+            cd $DIRPROJ/$PRMA && rm customer-data.json
         fi
-        cd $DIRPROJ/$PRMDIR && node csv-to-json.js
+        cd $DIRPROJ/$PRMA && node csv-to-json.js
     ;;
     a02)
+        clear
+
         echo "Running RESTful Blog API server..."
-        npm start
+        npm run-script starta02
     ;;
     a03)
-        echo "Not yet implemented."
+        clear
+
+        PRMPROC=$2
+
+        cd $DIRPROJ/$PRMA
+
+        echo "Droping database, if exists..."
+        mongo edxmsnodejs-a03 --eval "db.dropDatabase()"
+
+        echo "Importing customers data..."
+
+        mongoimport --db edxmsnodejs-a03 --collection customersdata --file m3-customer-data.json --jsonArray
+
+        echo "Importing customers address data..."
+        mongoimport --db edxmsnodejs-a03 --collection customersaddr --file m3-customer-address-data.json --jsonArray
+
+        node migrate-data.js $PRMPROC
     ;;
     a04)
+        clear
+
         echo "Not yet implemented."
     ;;
     *)

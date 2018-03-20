@@ -7,7 +7,7 @@
 * Run: *chmod +x runA.sh*
 
 ### Usage
-- *./runA {a01|a02|a03|a04}*
+- *./runA {a01|a02|a03 [value between 1 and 100 ]|a04}*
 
 ### Parameters
 - **a01**
@@ -22,10 +22,16 @@
 - **a03**
   - Assignment 03 - MongoDB Migration Node Script
     - In development
-     - I could realize until now
-        - how create a database
-        - a collection to this database
-        - and see some output info about this collection
+        - I could realize until now
+            - how create a database
+            - a collection to this database
+            - and see some output info about this collection
+        - 2018-03-20
+            - Starting development of the migration process
+
+    - As an example to run this assignment you must:
+        - *./runA a03 12 *
+            - As *12* **parameter** could a value between 1 to 100
 - **a04**
   - Assignment 04 - ?
     - not yet implemented
