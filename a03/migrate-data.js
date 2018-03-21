@@ -1,11 +1,9 @@
 // Assignment 03
 // MongoDB Migration Node Script
 
-const fs = require('fs')
-const process = require('process')
+const assert = require('assert');
 
 const logger = require('morgan')
-const errorhandler = require('errorhandler')
 const mongodb= require('mongodb')
 const async = require('async')
 
@@ -25,33 +23,11 @@ let usageHelp = ()=>{
     console.log('          - minimum task:    1')
 }
 
-let insCustomersData = (db, recs)=>{
-
-
-    const collection = db.db('customers')
-
-    collection.insert(
-        [],
-        (error, result) => {
-            if (error) 
-                return process.exit(1)
-
-            console.log(result.result.n)
-            console.log(result.ops.length)
-            console.log('Inserted 3 documents into the edx-course-students collection')
-
-        }
-    )
-
-
-}
-
 let migrationProcess = (nTasks) =>{
-
 
     mongodb.MongoClient.connect(
         url,
-        (error, db) => {
+        (error, client) => {
 
             if (error) {
                 console.log(error)
@@ -60,57 +36,31 @@ let migrationProcess = (nTasks) =>{
 
             console.log('Connection is okay')
 
-            let colc = db.db('edxmsnodejs-a03').collection('customersdata')
+            let colcCD = client.db('edxmsnodejs-a03').collection('customersdata')
 
-            let startR = 0
+            colcCD.find({}).toArray(
 
-            let loopNum = RECORDS/nTasks
+                (error,customerData)=>{
 
-            let jsonSlots = []
+                    let collCM = client.db('edxmsnodejs-a03').collection('customers')
 
-            for(var i=0; i < loopNum;i++){
+                    customerData.forEach(
+                        (cusRec,idx)=>{
 
-                colc.find(
-                    {},
-                    {
-                        skip: startR,
-                        limit: nTasks
-                    }
+                            collCM.insertOne(
+                                cusRec,
+                                function(err, r) {
+                                    assert.equal(null, err);
+                                    assert.equal(1, r.insertedCount);
+                                    console.log(r)
+                                    client.close()
+                                }
+                            )
 
-                ).toArray(
-
-                    (error, docs) => {
-                        if (error)
-                            return process.exit(1)
-
-                        let jsonTasks = {}
-
-
-                        for(let eachDoc of docs){
-
-                            jsonTasks[eachDoc.id] = ()=>{ insCustomersData(db,eachDoc) }
                         }
-
-
-                        async.parallel(
-                            jsonTasks,
-                            (error, results) => {
-                                if(error)
-                                    console.log(`Error message: ${error}`)
-
-                                if(Object.keys(results).length)
-                                    console.log(`Result object: ${results}`)
-                            }
-                        )
-                    }
-                )
-
-                startR += nTasks
-
-            }
-
-            db.close()
-
+                    )
+                }
+            )
         }
     )
 }
